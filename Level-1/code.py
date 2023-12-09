@@ -13,23 +13,21 @@
 
 from collections import namedtuple
 from math import fabs
+from decimal import Decimal
 
 Order = namedtuple('Order', 'id, items')
 Item = namedtuple('Item', 'type, description, amount, quantity')
 
 def validorder(order: Order):
-    payment_net = 0
-    product_net = 0
+    net = Decimal(0)
 
     for item in order.items:
         if item.type == 'payment':
-            payment_net += item.amount
+            net += Decimal(item.amount)
         elif item.type == 'product':
-            product_net += item.amount * item.quantity
+            net -= Decimal(item.amount) * item.quantity
         else:
             return("Invalid item type: %s" % item.type)
-
-    net = payment_net - product_net
 
     if fabs(net) > 1e-5:
         return("Order ID: %s - Payment imbalance: $%0.2f" % (order.id, net))
