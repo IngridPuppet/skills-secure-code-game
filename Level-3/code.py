@@ -31,7 +31,8 @@ class TaxPayer:
             pass
 
         # defends against path traversal attacks
-        if not safe_path(path):
+        path = safe_path(path)
+        if not path:
             return None
 
         # builds path
@@ -51,8 +52,8 @@ class TaxPayer:
         if not path:
             raise Exception("Error: Tax form is required for all users")
 
-        # defends against path traversal attacks
-        if not safe_path(path):
+        path = safe_path(path)
+        if not path:
             return None
 
         with open(path, 'rb') as form:
