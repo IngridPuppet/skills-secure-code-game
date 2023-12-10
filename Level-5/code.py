@@ -37,4 +37,3 @@ PRIVATE_KEY = os.environ.get('PRIVATE_KEY')
 PUBLIC_KEY = os.environ.get('PUBLIC_KEY')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 PASSWORD_HASHER = 'bcrypt_hasher'
-
